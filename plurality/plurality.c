@@ -1,98 +1,27 @@
-#include <cs50.h>
 #include <stdio.h>
 #include <string.h>
 
-// Max number of candidates
-#define MAX 9
 
-// Candidates have name and vote count
-typedef struct
-{
-    string name;
-    int votes;
-}
-candidate;
-
-// Array of candidates
-candidate candidates[MAX];
-
-// Number of candidates
-int candidate_count;
-
-// Function prototypes
-bool vote(string name);
-void print_winner(void);
 void merge(int arr[], int s, int m, int e);
 void merge_sort(int arr[], int start, int end);
 
-int main(int argc, string argv[])
+int main()
 {
-    // Check for invalid usage
-    if (argc < 2)
+    int Arr[] = {5, 3, 2, 5, 3, 2};
+
+    merge_sort(Arr, 0, 6);
+
+    for(int i = 0; i < 7; ++i)
     {
-        printf("Usage: plurality [candidate ...]\n");
-        return 1;
+        printf("%d\n", Arr[i]);
     }
 
-    // Populate array of candidates
-    candidate_count = argc - 1;
-    if (candidate_count > MAX)
-    {
-        printf("Maximum number of candidates is %i\n", MAX);
-        return 2;
-    }
-    for (int i = 0; i < candidate_count; i++)
-    {
-        candidates[i].name = argv[i + 1];
-        candidates[i].votes = 0;
-    }
-
-    int voter_count = get_int("Number of voters: ");
-
-    // Loop over all voters
-    for (int i = 0; i < voter_count; i++)
-    {
-        string name = get_string("Vote: ");
-
-        // Check for invalid vote
-        if (!vote(name))
-        {
-            printf("Invalid vote.\n");
-        }
-    }
-
-    // Display winner of election
-    print_winner();
-}
-
-// Update vote totals given a new vote
-bool vote(string name)
-{
-    for (int i = 0; i < candidate_count; ++i)
-    {
-        if(strcmp(name, candidates[i].name) == 0) {
-            candidates[i].votes++;
-            return true;
-        }
-    }
-    return false;
-}
-
-// Print the winner (or winners) of the election
-void print_winner(void)
-{
-    int tempArr[candidate_count];
-
-    for (int i = 0; i < candidate_count; ++i)
-    {
-        c
-    }
-    return;
 }
 
 void merge(int arr[], int s, int m, int e)
 {
-    int temp[e - s];
+
+    int *temp = malloc(sizeof(int) * e - s);
 
     int posL = s;
     int posR = m+1;
@@ -128,6 +57,8 @@ void merge(int arr[], int s, int m, int e)
     {
         arr[s + i] = temp[i];
     }
+
+    free(temp);
 }
 
 void merge_sort(int arr[], int start, int end)
